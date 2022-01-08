@@ -102,4 +102,5 @@ export default defineConfig({
     optimizeDeps: {
         exclude: ["revolt.js"],
     },
+    server: {port: 3001}
 });
