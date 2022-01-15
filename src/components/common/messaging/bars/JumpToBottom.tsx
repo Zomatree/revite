@@ -1,7 +1,7 @@
 import { DownArrowAlt } from "@styled-icons/boxicons-regular";
 import { observer } from "mobx-react-lite";
 import { Channel } from "revolt.js/dist/maps/Channels";
-import styled, { css } from "styled-components";
+import styled, { css } from "styled-components/macro";
 
 import { Text } from "preact-i18n";
 
@@ -39,6 +39,7 @@ export const Bar = styled.div<{ position: "top" | "bottom"; accent?: boolean }>`
         align-items: center;
         cursor: pointer;
         font-size: 12px;
+        font-weight: 500;
         padding: 0 8px;
         user-select: none;
         justify-content: space-between;
