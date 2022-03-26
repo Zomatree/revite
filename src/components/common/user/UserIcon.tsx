@@ -1,5 +1,4 @@
-import { MicrophoneOff } from "@styled-icons/boxicons-regular";
-import { VolumeMute } from "@styled-icons/boxicons-solid";
+import { VolumeMute, MicrophoneOff } from "@styled-icons/boxicons-solid";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
 import { Masquerade } from "revolt-api/types/Channels";
@@ -44,10 +43,6 @@ const VoiceIndicator = styled.div<{ status: VoiceStatus }>`
     align-items: center;
     justify-content: center;
 
-    svg {
-        stroke: white;
-    }
-
     ${(props) =>
         (props.status === "muted" || props.status === "deaf") &&
         css`
@@ -75,6 +70,7 @@ export default observer(
             hover,
             showServerIdentity,
             masquerade,
+            innerRef,
             ...svgProps
         } = props;
 
@@ -108,6 +104,7 @@ export default observer(
         return (
             <IconBase
                 {...svgProps}
+                ref={innerRef}
                 width={size}
                 height={size}
                 hover={hover}

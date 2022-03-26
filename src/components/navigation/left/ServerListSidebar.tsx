@@ -5,8 +5,8 @@ import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { RelationshipStatus } from "revolt-api/types/Users";
 import styled, { css } from "styled-components/macro";
 
-import { attachContextMenu } from "preact-context-menu";
-import { Text } from "preact-i18n";
+import { Ref } from "preact";
+import { useTriggerEvents } from "preact-context-menu";
 
 import ConditionalLink from "../../../lib/ConditionalLink";
 import PaintCounter from "../../../lib/PaintCounter";
@@ -265,7 +265,7 @@ export default observer(() => {
                     <ServerEntry home active={homeActive}>
                         <Swoosh />
                         <div
-                            onContextMenu={attachContextMenu("Status")}
+                            {...useTriggerEvents("Status")}
                             onClick={() =>
                                 homeActive && history.push("/settings")
                             }>
@@ -301,7 +301,7 @@ export default observer(() => {
                                 <ServerEntry
                                     home
                                     active={false}
-                                    onContextMenu={attachContextMenu("Menu", {
+                                    {...useTriggerEvents("Menu", {
                                         channel: x._id,
                                         unread: true,
                                     })}>
@@ -350,7 +350,7 @@ export default observer(() => {
                             to={state.layout.getServerPath(server._id)}>
                             <ServerEntry
                                 active={active}
-                                onContextMenu={attachContextMenu("Menu", {
+                                {...useTriggerEvents("Menu", {
                                     server: server._id,
                                     unread: isUnread,
                                 })}>
