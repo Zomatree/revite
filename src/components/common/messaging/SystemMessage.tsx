@@ -56,6 +56,7 @@ interface Props {
     message: Message;
     highlight?: boolean;
     hideInfo?: boolean;
+    channel?: string;
 }
 
 const iconDictionary = {
@@ -72,7 +73,7 @@ const iconDictionary = {
 };
 
 export const SystemMessage = observer(
-    ({ attachContext, message, highlight, hideInfo }: Props) => {
+    ({ attachContext, message, highlight, hideInfo, channel }: Props) => {
         const data = message.asSystemMessage;
         const SystemMessageIcon =
             iconDictionary[data.type as SystemMessageI["type"]] ?? InfoCircle;
@@ -92,8 +93,8 @@ export const SystemMessage = observer(
                                 : "removed_by"
                         }`}
                         fields={{
-                            user: <UserShort user={data.user} />,
-                            other_user: <UserShort user={data.by} />,
+                            user: <UserShort user={data.user} channel={channel} />,
+                            other_user: <UserShort user={data.by} channel={channel} />,
                         }}
                     />
                 );
@@ -106,7 +107,7 @@ export const SystemMessage = observer(
                     <TextReact
                         id={`app.main.channel.system.${data.type}`}
                         fields={{
-                            user: <UserShort user={data.user} />,
+                            user: <UserShort user={data.user} channel={channel} />,
                         }}
                     />
                 );
@@ -116,7 +117,7 @@ export const SystemMessage = observer(
                     <TextReact
                         id={`app.main.channel.system.channel_renamed`}
                         fields={{
-                            user: <UserShort user={data.by} />,
+                            user: <UserShort user={data.by} channel={channel} />,
                             name: <b>{data.name}</b>,
                         }}
                     />
@@ -128,7 +129,7 @@ export const SystemMessage = observer(
                     <TextReact
                         id={`app.main.channel.system.${data.type}`}
                         fields={{
-                            user: <UserShort user={data.by} />,
+                            user: <UserShort user={data.by} channel={channel} />,
                         }}
                     />
                 );

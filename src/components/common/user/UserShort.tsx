@@ -13,6 +13,7 @@ import { useIntermediate } from "../../../context/intermediate/Intermediate";
 import { useClient } from "../../../context/revoltjs/RevoltClient";
 
 import UserIcon from "./UserIcon";
+import { openContextMenu } from "preact-context-menu";
 
 const BotBadge = styled.div`
     display: inline-block;
@@ -112,12 +113,14 @@ export default function UserShort({
     prefixAt,
     masquerade,
     showServerIdentity,
+    channel
 }: {
     user?: User;
     size?: number;
     prefixAt?: boolean;
     masquerade?: Masquerade;
     showServerIdentity?: boolean;
+    channel?: string
 }) {
     const { openScreen } = useIntermediate();
     const openProfile = () =>
@@ -132,6 +135,12 @@ export default function UserShort({
         }
     };
 
+    const handleUserContextMenu = () => {
+        openContextMenu("Menu", {
+            user: user?._id, contextualChannel: channel
+        })
+    };
+
     return (
         <>
             <UserIcon
@@ -139,6 +148,7 @@ export default function UserShort({
                 size={size ?? 24}
                 masquerade={masquerade}
                 onClick={handleUserClick}
+                onContextMenu={handleUserContextMenu}
                 showServerIdentity={showServerIdentity}
             />
             <Username
@@ -146,6 +156,7 @@ export default function UserShort({
                 prefixAt={prefixAt}
                 masquerade={masquerade}
                 onClick={handleUserClick}
+                onContextMenu={handleUserContextMenu}
                 showServerIdentity={showServerIdentity}
             />
         </>

@@ -170,6 +170,7 @@ export default observer(({ last_id, renderer, highlight }: Props) => {
                     message={message}
                     attachContext
                     highlight={highlight === message._id}
+                    channel={renderer.channel._id}
                 />,
             );
         } else if (
